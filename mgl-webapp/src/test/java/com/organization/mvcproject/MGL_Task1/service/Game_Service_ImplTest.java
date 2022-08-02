@@ -25,8 +25,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import com.organization.mvcproject.MGL_Task1.model.Game;
 import com.organization.mvcproject.config.MvcConfiguration;
+import com.organization.mvcproject.model.Game;
+import com.organization.mvcproject.service.GameService;
 
 @RunWith(JUnitPlatform.class)
 @ExtendWith(SpringExtension.class)
@@ -37,7 +38,7 @@ class Game_Service_ImplTest {
 	
 	
 	@Autowired
-	private Game_Service gameServiceUnderTest;
+	private GameService gameServiceUnderTest;
 	
 	private static Game testGame = createGame(1);
 	
