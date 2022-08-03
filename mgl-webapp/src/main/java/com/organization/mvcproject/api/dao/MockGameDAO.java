@@ -3,13 +3,12 @@ package com.organization.mvcproject.api.dao;
 import java.util.List;
 
 import com.organization.mvcproject.api.model.Game;
-import com.organization.mvcproject.model.GameImpl;
 
 public interface MockGameDAO {
 	
-	List<GameImpl> retrieveAllGames();
+	List<Game> retrieveAllGames();
 
-	GameImpl saveGame(GameImpl game);
+	Game saveGame(Game game);
 
 	boolean deleteGameById(Long idOfGameToDelete);
 	

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.organization.mvcproject.api.model.Game;
 import com.organization.mvcproject.api.model.Review;
 import com.organization.mvcproject.api.service.GameService;
 import com.organization.mvcproject.model.GameImpl;
@@ -34,7 +35,7 @@ public class GameController {
 	@RequestMapping(value = "/review", method = RequestMethod.GET)
 	public ModelAndView review() {
 
-		return new ModelAndView("reviewCreatePage", "command", new Review());
+		return new ModelAndView("reviewCreatePage", "command", new ReviewImpl());
 	}
 
 	@RequestMapping(value = "/addReview", method = RequestMethod.POST)
@@ -58,8 +59,8 @@ public class GameController {
 	 */
 	
 	@RequestMapping(value = "/game", method = RequestMethod.GET)
-	public ResponseEntity<List<GameImpl>> fetchAllGames() {
-		return new ResponseEntity<List<GameImpl>>(gameService.retrieveAllGames(), HttpStatus.OK);
+	public ResponseEntity<List<Game>> fetchAllGames() {
+		return new ResponseEntity<List<Game>>(gameService.retrieveAllGames(), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/game", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -68,7 +69,7 @@ public class GameController {
 		return new ResponseEntity<Void>(HttpStatus.CREATED);
 	}
 	
-	@RequestMapping(value = "/{id}", method = RequestMethod.POST)
+	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<?> deleteGame(@PathVariable("id") Long id){
 		return new ResponseEntity<>(gameService.deleteGame(id), HttpStatus.OK);
 	}

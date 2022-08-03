@@ -14,13 +14,13 @@ public class MockGameDAOImpl implements MockGameDAO{
 	
 	private static Long gameId = new Long(0);
 	private static Long companyId = new Long(0);
-	private static List<GameImpl> games = new ArrayList<GameImpl>();
+	private static List<Game> games = new ArrayList<>();
 
 	static {
 		games = populateGames();
 	}
 
-	private static List<GameImpl> populateGames() {
+	private static List<Game> populateGames() {
 
 		GameImpl game1 = new GameImpl();
 		game1.setId(++gameId);
@@ -44,15 +44,15 @@ public class MockGameDAOImpl implements MockGameDAO{
 		return games;
 	}
 
-	public List<GameImpl> retrieveAllGames() {
+	public List<Game> retrieveAllGames() {
 		return games;
 	}
 
-	public GameImpl saveGame(GameImpl game) {
+	public Game saveGame(Game game) {
 		
 		//perform update if game has a valid id
 		if(game.getId() != null) {
-			GameImpl foundGame = findGameById(game.getId());
+			Game foundGame = findGameById(game.getId());
 			if(foundGame != null) {
 				for(int i = 0; i < games.size(); i++) {
 					if(game.getId().equals(games.get(i).getId())) {
@@ -80,7 +80,7 @@ public class MockGameDAOImpl implements MockGameDAO{
 	}
 	
 	public Game findGameById(Long gameIdToFind) {
-		for(GameImpl g : games) {
+		for(Game g : games) {
 			if(gameIdToFind.equals(g.getId())) {
 				return g;
 			}
