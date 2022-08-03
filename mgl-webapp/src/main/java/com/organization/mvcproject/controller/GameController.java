@@ -8,12 +8,14 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.organization.mvcproject.model.Game;
+import com.organization.mvcproject.model.GameImpl;
 import com.organization.mvcproject.model.Review;
 import com.organization.mvcproject.service.GameService;
 
@@ -47,7 +49,7 @@ public class GameController {
 	@RequestMapping(value = "/games", method = RequestMethod.GET)
 	public ModelAndView game() {
 
-		return new ModelAndView("gamesPage", "command", new Game());
+		return new ModelAndView("gamesPage", "command", new GameImpl());
 	}
 
 	/**
@@ -55,13 +57,25 @@ public class GameController {
 	 */
 	
 	@RequestMapping(value = "/game", method = RequestMethod.GET)
-	public ResponseEntity<List<Game>> fetchAllGames() {
-		return new ResponseEntity<List<Game>>(gameService.retrieveAllGames(), HttpStatus.OK);
+	public ResponseEntity<List<GameImpl>> fetchAllGames() {
+		return new ResponseEntity<List<GameImpl>>(gameService.retrieveAllGames(), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/game", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Void> createGame(@RequestBody Game game) {
+	public ResponseEntity<Void> createGame(@RequestBody GameImpl game) {
 		gameService.saveGame(game);
 		return new ResponseEntity<Void>(HttpStatus.CREATED);
 	}
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.POST)
+	public ResponseEntity<?> deleteGame(@PathVariable("id") Long id){
+		return new ResponseEntity<>(gameService.deleteGame(id), HttpStatus.OK);
+	}
+	
+	
+	
+	
+	
+	
+	
 }

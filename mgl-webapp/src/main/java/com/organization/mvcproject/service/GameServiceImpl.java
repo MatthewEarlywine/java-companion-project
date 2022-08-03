@@ -6,8 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.organization.mvcproject.model.Game;
-import com.organization.mvcproject.repository.MockGameDAO;
+import com.organization.mvcproject.dao.MockGameDAO;
+import com.organization.mvcproject.model.GameImpl;
 
 
 @Service
@@ -17,12 +17,12 @@ public class GameServiceImpl implements GameService {
 	private MockGameDAO mockGameDAO;
 	
 	@Override
-	public List<Game> retrieveAllGames() {
+	public List<GameImpl> retrieveAllGames() {
 		return mockGameDAO.retrieveAllGames();
 	}
 
 	@Override
-	public Game saveGame(Game game) {
+	public GameImpl saveGame(GameImpl game) {
 		//logic to save game
 		return mockGameDAO.saveGame(game);
 	}
@@ -33,7 +33,7 @@ public class GameServiceImpl implements GameService {
 	}
 
 	@Override
-	public Game updateGame(Game game) {
+	public GameImpl updateGame(GameImpl game) {
 		//logic to update game
 		return mockGameDAO.saveGame(game);
 	}
