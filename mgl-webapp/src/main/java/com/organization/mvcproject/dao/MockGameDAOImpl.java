@@ -5,10 +5,12 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.organization.mvcproject.api.dao.MockGameDAO;
+import com.organization.mvcproject.api.model.Game;
 import com.organization.mvcproject.model.GameImpl;
 
 @Repository
-public class MockGameDAO {
+public class MockGameDAOImpl implements MockGameDAO{
 	
 	private static Long gameId = new Long(0);
 	private static Long companyId = new Long(0);
@@ -77,13 +79,25 @@ public class MockGameDAO {
 		return false;
 	}
 	
-	public GameImpl findGameById(Long gameIdToFind) {
+	public Game findGameById(Long gameIdToFind) {
 		for(GameImpl g : games) {
 			if(gameIdToFind.equals(g.getId())) {
 				return g;
 			}
 		}
 		return null;
+	}
+	
+	public List<Game> findGamesByGenre(String genre) {
+		//for loop
+		List<Game> gamesOfGenre = new ArrayList<>();
+			for(int i = 0; i < games.size(); i++) {
+				if( genre == games.get(i).getGenre()) {
+					gamesOfGenre.add(games.get(i));
+				}
+			}
+			
+			return (gamesOfGenre.isEmpty()) ? null : gamesOfGenre;
 	}
 
 }

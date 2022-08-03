@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.organization.mvcproject.api.service.GameService;
 import com.organization.mvcproject.model.GameImpl;
 import com.organization.mvcproject.model.Review;
-import com.organization.mvcproject.service.GameService;
 
 @Controller
 public class GameController {
