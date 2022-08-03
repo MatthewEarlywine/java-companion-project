@@ -10,7 +10,7 @@ import com.organization.mvcproject.api.model.Game;
 import com.organization.mvcproject.model.GameImpl;
 
 @Repository
-public class MockGameDAOImpl implements MockGameDAO{
+public class MockGameDAOLoopsImpl implements MockGameDAO{
 	
 	private static Long gameId = new Long(0);
 	private static Long companyId = new Long(0);
