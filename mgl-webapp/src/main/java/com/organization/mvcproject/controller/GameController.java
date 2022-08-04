@@ -9,7 +9,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -30,15 +33,20 @@ public class GameController {
 	private GameService gameService;
 
 	
-	@RequestMapping(value = "/game", method = RequestMethod.GET)
+	@GetMapping(value = "/game")
 	public ResponseEntity<List<Game>> fetchAllGames() {
 		return new ResponseEntity<List<Game>>(gameService.retrieveAllGames(), HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/game", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(value = "/game", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Void> createGame(@RequestBody GameImpl game) {
 		gameService.saveGame(game);
 		return new ResponseEntity<Void>(HttpStatus.CREATED);
+	}
+	
+	@PutMapping(value = "/game", consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> updateGame(@RequestBody GameImpl game) {
+		return new ResponseEntity<>(gameService.saveGame(game), HttpStatus.OK);
 	}
 	
 	@DeleteMapping(value = "/{id}")
