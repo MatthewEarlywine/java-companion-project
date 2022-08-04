@@ -13,7 +13,6 @@ import com.organization.mvcproject.model.ReviewImpl;
 @Controller
 public class HomeController {
    
-	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home() {
 		return "index";
@@ -21,7 +20,6 @@ public class HomeController {
 	
 	@RequestMapping(value = "/review", method = RequestMethod.GET)
 	public ModelAndView review() {
-
 		return new ModelAndView("reviewCreatePage", "command", new ReviewImpl());
 	}
 
@@ -30,14 +28,11 @@ public class HomeController {
 		if(review.getAuthor().equals("")) {
 			review.setAuthor("anonymous");
 		}
-
 		return new ModelAndView("reviewDetailPage", "submittedReview", review);
 	}
 
-	
 	@RequestMapping(value = "/games", method = RequestMethod.GET)
 	public ModelAndView game() {
-
 		return new ModelAndView("gamesPage", "command", new GameImpl());
 	}
 	
