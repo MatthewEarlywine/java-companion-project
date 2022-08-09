@@ -2,6 +2,7 @@ package com.organization.mvcproject.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Repository;
 
@@ -70,22 +71,19 @@ public class MockGameDAOLoopsImpl implements MockGameDAO{
 		return game;
 	}
 
-	public boolean deleteGameById(Long idOfGameToDelete) {
-		for(int i = 0; i < games.size(); i++) {
-			if(games.get(i).getId().equals(idOfGameToDelete)) {
-				return games.remove(games.get(i));	
-			}
-		}
-		return false;
-	}
+//	public boolean deleteGameById(Long idOfGameToDelete) {
+//		for(int i = 0; i < games.size(); i++) {
+//			if(games.get(i).getId().equals(idOfGameToDelete)) {
+//				return games.remove(games.get(i));	
+//			}
+//		}
+//		return false;
+//	}
 	
-	public Game findGameById(Long gameIdToFind) {
-		for(Game g : games) {
-			if(gameIdToFind.equals(g.getId())) {
-				return g;
-			}
-		}
-		return null;
+	@Override
+	public List<Game> findRequestedGames(List<String> filters) {
+		if (filters.size() == 1 && filters.get(0).equals("All")) return this.retrieveAllGames();		
+		return games.stream().filter(g -> filters.contains(g.getGenre())).collect(Collectors.toList());
 	}
 	
 	public List<Game> findGamesByGenre(String genre) {
@@ -98,6 +96,21 @@ public class MockGameDAOLoopsImpl implements MockGameDAO{
 			}
 			
 			return (gamesOfGenre.isEmpty()) ? null : gamesOfGenre;
+	}
+
+	@Override
+	public Game findGameById(Long gameIdToFind) {
+		return games.stream().filter(g -> g.getId().equals(gameIdToFind)).findFirst().orElse(null);
+	}
+
+	public List<String> getGenres() {
+		List<String> genreList = games.stream().map(Game::getGenre).distinct().collect(Collectors.toList());
+		genreList.add(0, "All");
+		return genreList;
+	}
+
+	public boolean deleteGame(Game game) {		
+		return games.removeIf(g -> g.getId().equals(game.getId()));
 	}
 
 }

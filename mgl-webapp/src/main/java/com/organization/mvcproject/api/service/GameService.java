@@ -3,6 +3,7 @@ package com.organization.mvcproject.api.service;
 import java.util.List;
 
 import com.organization.mvcproject.api.model.Game;
+import com.organization.mvcproject.model.GameImpl;
 
 
 public interface GameService {
@@ -11,8 +12,12 @@ public interface GameService {
 
 	Game saveGame(Game game);
 	
-	Boolean deleteGame(Long gameId);
+	Boolean deleteGame(Game game);
 	
 	Game updateGame(Game game);
+
+	List<Game> findRequestedGames(List<String> filters);
+
+	List<String> getGenres();
 
 }
