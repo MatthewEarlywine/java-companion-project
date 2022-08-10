@@ -109,6 +109,7 @@ public class MockGameDAOLoopsImpl implements MockGameDAO{
 		return genreList;
 	}
 
+	@Override
 	public boolean deleteGame(Game game) {		
 		return games.removeIf(g -> g.getId().equals(game.getId()));
 	}
