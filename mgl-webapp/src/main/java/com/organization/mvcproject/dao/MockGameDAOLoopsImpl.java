@@ -95,8 +95,10 @@ public class MockGameDAOLoopsImpl implements MockGameDAO{
 				}
 			}
 			
+			System.out.println("Hey! The Data went out through MockGameDAOLoopsImpl.java findGamesByGenre!");
 			return (gamesOfGenre.isEmpty()) ? null : gamesOfGenre;
 	}
+	
 
 	@Override
 	public Game findGameById(Long gameIdToFind) {
@@ -106,6 +108,7 @@ public class MockGameDAOLoopsImpl implements MockGameDAO{
 	public List<String> getGenres() {
 		List<String> genreList = games.stream().map(Game::getGenre).distinct().collect(Collectors.toList());
 		genreList.add(0, "All");
+		System.out.println("Hey! The Data went out through MockGameDAOLoopsImpl.java getGenre!");
 		return genreList;
 	}
 
