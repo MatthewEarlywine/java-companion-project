@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.organization.mvcproject.api.service.GameService;
 import com.organization.mvcproject.dao.MockGameDAOLoopsImpl;
+import com.organization.mvcproject.api.dao.MockGameDAO;
 import com.organization.mvcproject.api.model.Game;
 
 
@@ -14,7 +15,7 @@ import com.organization.mvcproject.api.model.Game;
 public class GameServiceImpl implements GameService {
 	
 	@Autowired
-	private MockGameDAOLoopsImpl mockGameDAO;
+	private MockGameDAO mockGameDAO;
 	
 	@Override
 	public List<Game> retrieveAllGames() {
