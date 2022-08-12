@@ -27,6 +27,7 @@ angular.module('GameLibraryApp').controller('LibraryController',
 				LibraryService.fetchRequestedGames(Array.from(this.filters)).then((data) => {
 					this.games = this.sortGameData(data);
 					this.getGenres();
+					this.reset();
 				});
 			}
 
