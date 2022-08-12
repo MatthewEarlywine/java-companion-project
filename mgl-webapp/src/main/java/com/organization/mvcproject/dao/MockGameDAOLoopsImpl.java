@@ -86,6 +86,11 @@ public class MockGameDAOLoopsImpl implements MockGameDAO{
 		return games.stream().filter(g -> filters.contains(g.getGenre())).collect(Collectors.toList());
 	}
 	
+	@Override
+	public List<Game> findAllGames() {
+		return games;
+	}
+	
 	public List<Game> findGamesByGenre(String genre) {
 		//for loop
 		List<Game> gamesOfGenre = new ArrayList<>();
@@ -101,8 +106,8 @@ public class MockGameDAOLoopsImpl implements MockGameDAO{
 	
 
 	@Override
-	public Game findGameById(Long gameIdToFind) {
-		return games.stream().filter(g -> g.getId().equals(gameIdToFind)).findFirst().orElse(null);
+	public Game findGameById(Long id) {
+		return games.stream().filter(g -> g.getId().equals(id)).findFirst().orElse(null);
 	}
 
 	public List<String> getGenres() {

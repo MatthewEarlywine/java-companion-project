@@ -14,11 +14,11 @@ angular.module('GameLibraryApp').factory('LibraryService', ['$http', function($h
 		return factory;
 
 		function fetchRequestedGames(filters) {
-			return $http.get(REST_SERVICE_URI, filters).then((response) => response.data);
+			return $http.post(REST_SERVICE_URI, filters).then((response) => response.data);
 		}
 
 		function createGame(game) {
-			return $http.post(REST_SERVICE_URI, game).then(function(response) {
+			return $http.post(REST_SERVICE_URI + 'save', game).then(function(response) {
 					return response.data;
 				}
 			);
