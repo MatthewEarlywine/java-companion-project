@@ -11,8 +11,12 @@ public interface GameService {
 
 	Game saveGame(Game game);
 	
-	Boolean deleteGame(Long gameId);
+	Boolean deleteGame(Game game);
 	
 	Game updateGame(Game game);
+
+	List<Game> findRequestedGames(List<String> filters);
+
+	List<String> getGenres();
 
 }

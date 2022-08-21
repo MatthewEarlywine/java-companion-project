@@ -10,10 +10,14 @@ public interface MockGameDAO {
 
 	Game saveGame(Game game);
 
-	boolean deleteGameById(Long idOfGameToDelete);
+	boolean deleteGame(Game game);
 	
-	Game findGameById(Long gameIdToFind);
+	Game findGameById(Long id);
 	
 	List<Game> findGamesByGenre(String genre);
+
+	List<Game> findRequestedGames(List<String> filters);
+
+	List<Game> findAllGames();
 
 }

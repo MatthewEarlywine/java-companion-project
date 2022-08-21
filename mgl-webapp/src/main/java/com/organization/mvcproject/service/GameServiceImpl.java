@@ -22,20 +22,30 @@ public class GameServiceImpl implements GameService {
 	}
 
 	@Override
+	public List<Game> findRequestedGames(List<String> filters) {
+		return mockGameDAO.findRequestedGames(filters);
+	}
+	
+	@Override
 	public Game saveGame(Game game) {
 		//logic to save game
 		return mockGameDAO.saveGame(game);
 	}
 
 	@Override
-	public Boolean deleteGame(Long gameId) {
-		return mockGameDAO.deleteGameById(gameId);
+	public Boolean deleteGame(Game game) {
+		return mockGameDAO.deleteGame(game);
 	}
 
 	@Override
 	public Game updateGame(Game game) {
 		//logic to update game
 		return mockGameDAO.saveGame(game);
+	}
+	
+	@Override
+	public List<String> getGenres() {
+		return mockGameDAO.getGenres();
 	}
 
 }
