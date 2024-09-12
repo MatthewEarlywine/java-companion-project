@@ -1,14 +1,14 @@
-package com.organization.mvcproject.service;
+package com.organization.mvcproject.repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 
 import com.organization.mvcproject.model.Game;
 
-@Service
-public class GameServiceImpl implements GameService {
+@Repository
+public class MockGameDAO {
 	
 	private static Long gameId = new Long(0);
 	private static Long companyId = new Long(0);
@@ -42,15 +42,48 @@ public class GameServiceImpl implements GameService {
 		return games;
 	}
 
-	@Override
 	public List<Game> retrieveAllGames() {
 		return games;
 	}
 
-	@Override
 	public Game saveGame(Game game) {
+		
+		//perform update if game has a valid id
+		if(game.getId() != null) {
+			Game foundGame = findGameById(game.getId());
+			if(foundGame != null) {
+				for(int i = 0; i < games.size(); i++) {
+					if(game.getId().equals(games.get(i).getId())) {
+						games.set(i, game);
+						return findGameById(game.getId());
+					}
+				}
+			}
+		}
+		
+		//create a new game
 		game.setId(++gameId);
 		games.add(game);
+		
 		return game;
 	}
+
+	public boolean deleteGameById(Long idOfGameToDelete) {
+		for(int i = 0; i < games.size(); i++) {
+			if(games.get(i).getId().equals(idOfGameToDelete)) {
+				return games.remove(games.get(i));	
+			}
+		}
+		return false;
+	}
+	
+	public Game findGameById(Long gameIdToFind) {
+		for(Game g : games) {
+			if(gameIdToFind.equals(g.getId())) {
+				return g;
+			}
+		}
+		return null;
+	}
+
 }
